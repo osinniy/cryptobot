@@ -1,0 +1,15 @@
+secrets:
+  botToken: 0000000000:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX # Your bot token. How to obtain your token: https://core.telegram.org/bots/features#botfather
+  cmcApiKey: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx # CMC api key: https://pro.coinmarketcap.com/account
+
+database: 
+  path: cryptobot.sqlite # Path to sqlite database file
+
+service:
+  refreshInterval: 600 # interval in seconds to refresh data
+  keepAlive: 168 # hours in which data will be kept in database
+
+logs:
+  level: info # Log level: trace, debug, info, warn, error, fatal, panic
+  path: cryptobot.log # Path to log file
+  slowReqThreshold: 1500 # Threshold in which logger will log request as warn

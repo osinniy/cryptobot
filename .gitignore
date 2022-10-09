@@ -1,0 +1,11 @@
+.vscode
+
+*.exe
+*.exe~
+
+configs/debug
+configs/release
+
+*.sqlite
+*.log
+*.sarif
