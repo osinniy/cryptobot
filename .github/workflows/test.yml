@@ -21,13 +21,20 @@ jobs:
       with:
         go-version: 1.19
 
+    - name: Setup cache folders
+      id: cache-folders
+      run: |
+        echo '::set-output name=GOCACHE::$(go env GOCACHE)'
+        echo '::set-output name=GOMODCACHE::$(go env GOMODCACHE)'
+        echo '::set-output name=GOBIN::$(go env GOPATH)/bin'
+
     - uses: actions/cache@v3
       id: cache
       with:
         path: |
-          ${{ $GOCACHE }}
-          ${{ $GOMODCACHE }}
-          ${{ $GOPATH }}/bin
+          ${{ steps.cache-folders.outputs.GOCACHE }}
+          ${{ steps.cache-folders.outputs.GOMODCACHE }}
+          ${{ steps.cache-folders.outputs.GOBIN }}
         key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
 
     - name: Install goose
