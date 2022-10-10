@@ -54,9 +54,9 @@ func TestInvalidStore(t *testing.T) {
 	s, db, err := sqlstore.TestDb(t, invalidPath)
 	assert.Nil(t, db)
 	if runtime.GOOS == "windows" {
-		assert.Equal(t, err.Error(), "unable to open database file: The system cannot find the file specified.")
-	} else {
-		assert.Equal(t, err.Error(), "unable to open database file: no such file or directory")
+		t.Skip("Skip test on windows")
 	}
+
+	assert.Equal(t, err.Error(), "unable to open database file: no such file or directory")
 	assert.Equal(t, invalidPath, s.Path)
 }
