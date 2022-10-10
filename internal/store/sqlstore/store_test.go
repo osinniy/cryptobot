@@ -50,13 +50,13 @@ func teardown() {
 }
 
 func TestInvalidStore(t *testing.T) {
-	invalidPath := "/invalid_db"
-	s, db, err := sqlstore.TestDb(t, invalidPath)
-	assert.Nil(t, db)
 	if runtime.GOOS == "windows" {
 		t.Skip("Skip test on windows")
 	}
 
+	invalidPath := "/invalid_db"
+	s, db, err := sqlstore.TestDb(t, invalidPath)
+	assert.Nil(t, db)
 	assert.Equal(t, err.Error(), "unable to open database file: no such file or directory")
 	assert.Equal(t, invalidPath, s.Path)
 }
