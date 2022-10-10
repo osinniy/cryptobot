@@ -26,11 +26,11 @@ jobs:
       shell: bash
       run: |
         gocache=$(go env GOCACHE)
-        echo '::set-output name=GOCACHE::$gocache'
+        echo "::set-output name=GOCACHE::$gocache"
         gomodcache=$(go env GOMODCACHE)
-        echo '::set-output name=GOMODCACHE::$gomodcache'
+        echo "::set-output name=GOMODCACHE::$gomodcache"
         gopath=$(go env GOPATH)
-        echo '::set-output name=GOBIN::$gopath/bin'
+        echo "::set-output name=GOBIN::$gopath/bin"
 
     - uses: actions/cache@v3
       id: cache
