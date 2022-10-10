@@ -28,5 +28,8 @@ jobs:
           ~/go/pkg/mod
         key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
 
+    - name: Install goose
+      run: go install github.com/pressly/goose/v3/cmd/goose@latest
+
     - name: Test
       run: make test
