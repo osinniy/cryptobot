@@ -15,6 +15,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        persist-credentials: false
+        fetch-depth: 0
 
     - name: Setup Go
       uses: actions/setup-go@v3
@@ -32,7 +35,8 @@ jobs:
         gopath=$(go env GOPATH)
         echo "::set-output name=GOBIN::$gopath/bin"
 
-    - uses: actions/cache@v3
+    - name: Cache
+      uses: actions/cache@v3
       id: cache
       with:
         path: |
@@ -46,4 +50,32 @@ jobs:
       run: go install github.com/pressly/goose/v3/cmd/goose@latest
 
     - name: Test
-      run: make test
+      run: |
+        make test
+        go tool cover -func=coverage.out -o=coverage.out
+
+    - name: Go Coverage Badge
+      uses: tj-actions/coverage-badge-go@v2
+      with:
+        filename: coverage.out
+
+    - name: Verify Change
+      uses: tj-actions/verify-changed-files@v9.1
+      id: verify-changed-files
+      with:
+        files: README.md
+
+    - name: Commit
+      if: steps.verify-changed-files.outputs.files_changed == 'true'
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add README.md
+        git commit -m "chore: Updated coverage badge"
+
+    - name: Push
+      if: steps.verify-changed-files.outputs.files_changed == 'true'
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ github.token }}
+        branch: ${{ github.head_ref }}
