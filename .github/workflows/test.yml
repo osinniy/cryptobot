@@ -55,18 +55,20 @@ jobs:
         go tool cover -func=coverage.out -o=coverage.out
 
     - name: Go Coverage Badge
+      if: matrix.os == 'ubuntu-latest'
       uses: tj-actions/coverage-badge-go@v2
       with:
         filename: coverage.out
 
     - name: Verify Change
+      if: matrix.os == 'ubuntu-latest'
       uses: tj-actions/verify-changed-files@v9.1
       id: verify-changed-files
       with:
         files: README.md
 
     - name: Commit
-      if: steps.verify-changed-files.outputs.files_changed == 'true'
+      if: matrix.os == 'ubuntu-latest' && steps.verify-changed-files.outputs.files_changed == 'true'
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
@@ -74,7 +76,7 @@ jobs:
         git commit -m "chore: Updated coverage badge"
 
     - name: Push
-      if: steps.verify-changed-files.outputs.files_changed == 'true'
+      if: matrix.os == 'ubuntu-latest' && steps.verify-changed-files.outputs.files_changed == 'true'
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ github.token }}
