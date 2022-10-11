@@ -51,9 +51,11 @@ jobs:
       run: go install github.com/pressly/goose/v3/cmd/goose@latest
 
     - name: Test
-      run: |
-        make test
-        go tool cover -func=coverage.out -o=coverage.out
+      run: make test
+
+    - name: Run cover tool
+      if: matrix.os == 'ubuntu-latest'
+      run: go tool cover -func=coverage.out -o=coverage.out
 
     - name: Go Coverage Badge
       if: matrix.os == 'ubuntu-latest'
