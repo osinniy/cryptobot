@@ -1,0 +1,81 @@
+name: Go
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        persist-credentials: false
+        fetch-depth: 0
+
+    - name: Setup Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: 1.19
+
+    - name: Setup cache folders
+      id: cache-folders
+      shell: bash
+      run: |
+        gocache=$(go env GOCACHE)
+        echo "::set-output name=GOCACHE::$gocache"
+        gomodcache=$(go env GOMODCACHE)
+        echo "::set-output name=GOMODCACHE::$gomodcache"
+        gopath=$(go env GOPATH)
+        echo "::set-output name=GOBIN::$gopath/bin"
+
+    - name: Cache
+      uses: actions/cache@v3
+      id: cache
+      with:
+        path: |
+          ${{ steps.cache-folders.outputs.GOCACHE }}
+          ${{ steps.cache-folders.outputs.GOMODCACHE }}
+          ${{ steps.cache-folders.outputs.GOBIN }}
+        key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+
+    - name: Install goose
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: go install github.com/pressly/goose/v3/cmd/goose@latest
+
+    - name: Test
+      run: |
+        make test
+        go tool cover -func=coverage.out -o=coverage.out
+
+    - name: Go Coverage Badge
+      uses: tj-actions/coverage-badge-go@v2
+      with:
+        filename: coverage.out
+
+    - name: Verify Change
+      uses: tj-actions/verify-changed-files@v9.1
+      id: verify-changed-files
+      with:
+        files: README.md
+
+    - name: Commit
+      if: steps.verify-changed-files.outputs.files_changed == 'true'
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add README.md
+        git commit -m "chore: Updated coverage badge"
+
+    - name: Push
+      if: steps.verify-changed-files.outputs.files_changed == 'true'
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ github.token }}
+        branch: ${{ github.head_ref }}
