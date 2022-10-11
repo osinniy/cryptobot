@@ -7,6 +7,7 @@ import (
 	"osinniy/cryptobot/internal/bot"
 	"osinniy/cryptobot/internal/cmd"
 	"osinniy/cryptobot/internal/config"
+	"osinniy/cryptobot/internal/data"
 	"osinniy/cryptobot/internal/logs"
 	"osinniy/cryptobot/internal/service"
 	"osinniy/cryptobot/internal/store"
@@ -24,14 +25,27 @@ func Run(flags cmd.Flags) {
 	logs.Setup()
 
 	// config
-	cfg := config.Configure(flags.ConfigPath, true)
+	cfg := config.Configure(flags.ConfigPath)
 	if cfg == nil {
-		return
+		os.Exit(1)
 	}
 
+	// setup logs
 	if flags.Debug && zerolog.GlobalLevel() > zerolog.DebugLevel {
 		zerolog.SetGlobalLevel(zerolog.DebugLevel)
 	}
+
+	logs.SetLevel(cfg.Logs.Level)
+	logs.SetSlowReqThreshold(cfg.Logs.SlowReqThreshold)
+
+	if cfg.Logs.Path != "" {
+		logs.SetLogFile(cfg.Logs.Path)
+	} else {
+		log.Warn().Msg("log file is not set, using stdout only")
+	}
+
+	// set cmc api key as global variable. temporary solution
+	data.SetCmcApiKey(cfg.Secrets.CMCApiKey)
 
 	// store
 	var store store.Store
@@ -43,7 +57,7 @@ func Run(flags cmd.Flags) {
 		store = sqlstore
 		// also we can use store with caching:
 		// memstore := memstore.New()
-		// store = mergedstore.Merge(memstore, sqlitestore)
+		// store = mergedstore.Merge(memstore, sqlstore)
 	}
 
 	// service

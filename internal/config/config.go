@@ -1,11 +1,8 @@
 package config
 
 import (
-	"osinniy/cryptobot/internal/logs"
-
 	"github.com/gookit/config/v2"
 	"github.com/gookit/config/v2/yamlv3"
-	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 )
 
@@ -31,12 +28,8 @@ type Config struct {
 	} `mapstructure:"logs"`
 }
 
-// TODO: remove global valiable
-// Global config. Must be initialized with Configure() and global=true before use
-var Global *Config
-
 // Reads config from configFile. If global is true, then saves config to config.Global
-func Configure(configFile string, global bool) *Config {
+func Configure(configFile string) *Config {
 	cfg := config.NewWith(configFile, func(c *config.Config) {
 		c.WithOptions(config.ParseEnv).AddDriver(yamlv3.Driver)
 	})
@@ -44,7 +37,7 @@ func Configure(configFile string, global bool) *Config {
 	// Load config from file
 	err := cfg.LoadFiles(configFile)
 	if err != nil {
-		logConfigError(err, configFile, global, "failed to load config")
+		log.Error().Err(err).Str("config", configFile).Msg("failed to load config")
 		return nil
 	}
 
@@ -52,26 +45,11 @@ func Configure(configFile string, global bool) *Config {
 	conf := &Config{}
 	err = cfg.Decode(conf)
 	if err != nil {
-		logConfigError(err, configFile, global, "failed to parse config")
+		log.Error().Err(err).Str("config", configFile).Msg("failed to parse config")
 		return nil
 	}
 
 	checkDefaults(conf)
-
-	if global {
-		Global = conf
-
-		logs.SetLevel(conf.Logs.Level)
-		logs.SetSlowReqThreshold(conf.Logs.SlowReqThreshold)
-
-		if conf.Logs.Path != "" {
-			logs.SetLogFile(conf.Logs.Path)
-		} else {
-			log.Warn().Msg("log file is not set, using stdout only")
-		}
-	}
-
-	log.Info().Str("config", configFile).Msg("using")
 
 	return conf
 }
@@ -92,15 +70,4 @@ func checkDefaults(conf *Config) {
 	if conf.Logs.Level == "" {
 		conf.Logs.Level = DEFAULT_LOG_LEVEL
 	}
-}
-
-// Logs config error with fatal level if global=true or with error level if global=false
-func logConfigError(err error, configFile string, global bool, msg string) {
-	var logE *zerolog.Event
-	if global {
-		logE = log.Fatal()
-	} else {
-		logE = log.Error()
-	}
-	logE.Err(err).Str("config", configFile).Msg(msg)
 }

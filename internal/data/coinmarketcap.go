@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"time"
 
-	"osinniy/cryptobot/internal/config"
 	"osinniy/cryptobot/internal/logs"
 
 	"github.com/rs/zerolog/log"
@@ -17,6 +16,12 @@ const (
 	CMC_SITE_URL = "https://coinmarketcap.com/"
 	CMC_API_URL  = "https://pro-api.coinmarketcap.com/"
 )
+
+var cmcApiKey string
+
+func SetCmcApiKey(key string) {
+	cmcApiKey = key
+}
 
 // Returns latest global market stats from coinmarketcap.com
 //
@@ -30,7 +35,7 @@ func LatestMarketStats() (result *CMCMetricsResponse, err error) {
 		return
 	}
 
-	req.Header.Add("X-CMC_PRO_API_KEY", config.Global.Secrets.CMCApiKey)
+	req.Header.Add("X-CMC_PRO_API_KEY", cmcApiKey)
 	timestamp := time.Now()
 	res, err := httpClient.Do(req)
 	if err != nil {
