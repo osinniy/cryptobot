@@ -6,10 +6,10 @@
 ### **Cryptobot** basically consists of three parts: Service, Store and Bot.
 
 **[Service](internal/service/service.go)** fetches data from **[Data](internal/data)** endpoints and saves it to **[DataRepository](internal/store/repository.go)**.
-**[Store](internal/store/store.go)** of these repository have third different implementations: **[SqlStore](internal/store/sqlstore)**, **[MemStore](internal/store/memstore)** and **[MergedStore](internal/store/mergedstore)** (which uses both of them).
+**[Store](internal/store/store.go)** of this repository have third different implementations: **[SqlStore](internal/store/sqlstore)**, **[MemStore](internal/store/memstore)** and **[MergedStore](internal/store/mergedstore)** (which uses both of them).
 **[Bot](internal/bot)** fetches data from store by user request received from *Telegram*.
-It also have optional **[api](internal/api)** that makes accessible some metrics to *CLI*. *Prometeus* uses this cli to fetch metrics and show them in *Grafana*.
-*CLI - Prometeus - Grafana* chain is not implemented yet.
+It also has optional **[API](internal/api)** that makes accessible some metrics to *CLI*. *Prometheus* uses this CLI to fetch metrics and show them in *Grafana*.
+*CLI - Prometheus - Grafana* chain is not implemented yet.
 
 ## Run
 
@@ -75,7 +75,7 @@ After that you need to run migrations. We use [goose](https://github.com/pressly
 go install github.com/pressly/goose/v3/cmd/goose@latest
 ```
 
-It's might be neccessary to add GOBIN to your PATH:
+It might be necessary to add GOBIN to your PATH:
 
 ```bash
 PATH=$PATH:$(go env GOPATH)/bin
