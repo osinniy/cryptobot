@@ -60,7 +60,7 @@ func Setup(store store.Store, token string) (b *Bot) {
 		}
 	})
 
-	// Handle panics. Without atguments it will call [Bot.onError] with nil context
+	// Handle panics. Without arguments it will call [Bot.onError] with nil context
 	b.tbot.Use(middleware.Recover())
 
 	b.initHandlers()
@@ -87,7 +87,7 @@ func (b *Bot) Stop() {
 }
 
 func (b *Bot) onError(err error, c tg.Context) {
-	if err.Error() == ErrMessageNotModified.Error() {
+	if err == tg.ErrSameMessageContent {
 		return
 	}
 
