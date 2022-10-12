@@ -8,24 +8,24 @@ import (
 
 type Config struct {
 	Secrets struct {
-		BotToken  string `mapstructure:"botToken"`
-		CMCApiKey string `mapstructure:"cmcApiKey"`
-	} `mapsstructure:"secrets"`
+		BotToken  string
+		CMCApiKey string
+	}
 
 	Database struct {
-		Path string `mapstructure:"path"`
-	} `mapstructure:"database"`
+		Path string
+	}
 
 	Service struct {
-		RefreshInterval uint `mapstructure:"refreshInterval"`
-		KeepAlive       uint `mapstructure:"keepAlive"`
-	} `mapstructure:"service"`
+		RefreshInterval uint
+		KeepAlive       uint
+	}
 
 	Logs struct {
-		Level            string `mapstructure:"level"`
-		SlowReqThreshold uint   `mapstructure:"slowReqThreshold"`
-		Path             string `mapstructure:"path"`
-	} `mapstructure:"logs"`
+		Level            string
+		SlowReqThreshold uint
+		Path             string
+	}
 }
 
 // Reads config from configFile. If global is true, then saves config to config.Global
