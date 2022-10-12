@@ -34,7 +34,8 @@ secrets:
   cmcApiKey: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 ```
 
-You can find full list of variables and their default values here: [configs/example/bot.yml](configs/example/bot.yml).
+It's also recommended setting up a webhook. To proceed go to [example config](configs/example/bot.yml) and fill webhook config as shown there.
+Full list of variables and their default values you can also find here: [configs/example/bot.yml](configs/example/bot.yml).
 
 ### 3. Build & run
 

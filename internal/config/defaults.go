@@ -1,6 +1,10 @@
 package config
 
 const (
+	DEFAULT_WEBHOOK_PORT        = 8443
+	DEFAULT_WEBHOOK_PUBLIC_KEY  = "cert.pem"
+	DEFAULT_WEBHOOK_PRIVATE_KEY = "key.pem"
+
 	DEFAULT_DATABASE_PATH = "cryptobot.sqlite"
 
 	DEFAULT_SERVICE_REFRESH_INTERVAL = 600 // 10 minutes

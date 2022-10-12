@@ -2,12 +2,20 @@ secrets:
   botToken: 0000000000:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX # Your bot token. How to obtain your token: https://core.telegram.org/bots/features#botfather
   cmcApiKey: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx # CMC api key: https://pro.coinmarketcap.com/account
 
-database: 
+webhook:
+  enabled: false # Enable webhook
+  ip: 0.0.0.0 # Your PUBLIC ip. Can be ip of your load balancer or something like that. Also you can use here your domain if you want so
+  port: 8443 # Port for webhook. Can be one of 443, 80, 88, 8443. Do not forget to open this port in your firewall
+  secret: secret-xxxxxxxxxx # Webhook secret string. Optional, but highly recommended. Only characters A-Z, a-z, 0-9, _ and - are allowed
+  pubKey: cert.pem # Your public key. Can be self-signed. How to generate: https://core.telegram.org/bots/self-signed
+  privKey: key.pem # Your private key. Note that it necessarily to set CN (Common Name) to your public ip or domain name while generating
+
+database:
   path: cryptobot.sqlite # Path to sqlite database file
 
 service:
-  refreshInterval: 600 # interval in seconds to refresh data
-  keepAlive: 168 # hours in which data will be kept in database
+  refreshInterval: 600 # Interval in seconds to refresh data
+  keepAlive: 168 # Hours in which data will be retained in database
 
 logs:
   level: info # Log level: trace, debug, info, warn, error, fatal, panic

@@ -77,7 +77,7 @@ func Run(flags cmd.Flags) {
 	go server.Serve()
 
 	// bot
-	bot := bot.Setup(store, cfg.Secrets.BotToken)
+	bot := bot.Setup(store, cfg.Secrets.BotToken, cfg.Webhook)
 	go bot.Run()
 
 	// shutdown

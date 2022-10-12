@@ -6,11 +6,22 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
+type Webhook struct {
+	Enabled bool
+	Ip      string
+	Port    int
+	Secret  string
+	PubKey  string
+	PrivKey string
+}
+
 type Config struct {
 	Secrets struct {
 		BotToken  string
 		CMCApiKey string
 	}
+
+	Webhook Webhook
 
 	Database struct {
 		Path string
@@ -50,11 +61,21 @@ func Configure(configFile string) *Config {
 	}
 
 	checkDefaults(conf)
+	validate(conf)
 
 	return conf
 }
 
 func checkDefaults(conf *Config) {
+	if conf.Webhook.Port == 0 {
+		conf.Webhook.Port = DEFAULT_WEBHOOK_PORT
+	}
+	if conf.Webhook.PubKey == "" {
+		conf.Webhook.PubKey = DEFAULT_WEBHOOK_PUBLIC_KEY
+	}
+	if conf.Webhook.PrivKey == "" {
+		conf.Webhook.PrivKey = DEFAULT_WEBHOOK_PRIVATE_KEY
+	}
 	if conf.Database.Path == "" {
 		conf.Database.Path = DEFAULT_DATABASE_PATH
 	}
@@ -69,5 +90,26 @@ func checkDefaults(conf *Config) {
 	}
 	if conf.Logs.Level == "" {
 		conf.Logs.Level = DEFAULT_LOG_LEVEL
+	}
+}
+
+func validate(conf *Config) {
+	switch conf.Webhook.Port {
+	case 0, 443, 80, 88, 8443:
+	default:
+		log.Error().Int("port", conf.Webhook.Port).Msg("invalid webhook port in config")
+	}
+
+	for i, char := range conf.Webhook.Secret {
+		if (char < 'a' || char > 'z') &&
+			(char < 'A' || char > 'Z') &&
+			(char < '0' || char > '9') &&
+			char != '_' &&
+			char != '-' {
+			i++
+			log.Error().Str("char", string(char)).Int("position", i).
+				Msg("configured webhook secret contains invalid character")
+			break
+		}
 	}
 }
