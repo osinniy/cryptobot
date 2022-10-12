@@ -47,7 +47,7 @@ func (b *Bot) onGlobalStats(c tg.Context) error {
 	if err != nil || data == nil {
 		return err
 	}
-	_, err = b.tbot.Edit(c.Message(), fmtGlobalStats(*data), tg.ModeMarkdown, btnsStats)
+	_, err = b.tbot.Edit(c.Message(), FmtGlobalStats(*data), tg.ModeMarkdown, btnsStats)
 	return err
 }
 
@@ -58,7 +58,7 @@ func (b *Bot) onFuturesStats(c tg.Context) error {
 		return err
 	}
 
-	_, err = b.tbot.Edit(c.Message(), fmtFuturesStats(*data), tg.ModeMarkdown, btnsFutures)
+	_, err = b.tbot.Edit(c.Message(), FmtFuturesStats(*data), tg.ModeMarkdown, btnsFutures)
 	return err
 }
 

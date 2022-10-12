@@ -17,7 +17,7 @@ const (
 )
 
 // Output must be send with tg.ModeMarkdown
-func fmtGlobalStats(data models.Data) string {
+func FmtGlobalStats(data models.Data) string {
 	var sb strings.Builder
 	sb.Grow(256)
 	msg := message.NewPrinter(language.Ukrainian)
@@ -44,7 +44,7 @@ func fmtGlobalStats(data models.Data) string {
 }
 
 // Output must be send with tg.ModeMarkdown
-func fmtFuturesStats(data models.Data) string {
+func FmtFuturesStats(data models.Data) string {
 	var sb strings.Builder
 	sb.Grow(256)
 	msg := message.NewPrinter(language.Ukrainian)
