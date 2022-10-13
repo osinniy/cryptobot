@@ -35,7 +35,7 @@ WORKDIR /app
 
 COPY --from=builder /src/cryptobot .
 COPY --from=builder /src/configs/release/bot.yml .
-COPY --from=builder /src/cryptobot.sqlite .
+COPY --from=builder /src/cryptobot.sqlite files/cryptobot.sqlite
 
 ENV API_PORT 2121
 EXPOSE $API_PORT
