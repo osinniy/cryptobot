@@ -48,10 +48,17 @@ mkdir configs/release
 mv bot.yml configs/release/bot.yml
 ```
 
-Then run the build:
+Then run the build. If you use webhook, pass your IP as shown below. Certificates will be generated during the build with your IP.
 
 ```bash
-make && make run
+make ip=0.0.0.0 # Or simply make if webhook is disabled
+```
+
+After process is finished, you will have osinniy/cryptobot image. Now you can run the project.
+Webhook users should also pass port they set in config so docker can expose it:
+
+```bash
+make run port=8443 # Or simply make run if webhook is disabled
 ```
 
 ### Manual build

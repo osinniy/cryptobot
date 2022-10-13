@@ -6,10 +6,14 @@ sec:
 	gosec -no-fail cmd/... internal/...
 
 build:
-	docker build -t osinniy/cryptobot:dev .
+	docker build --build-arg ip=$(ip) -t osinniy/cryptobot:dev .
 
 run:
+ifdef port
+	docker run -d -p 2121:2121 -p $(port):$(port) -v cbot-files:/app/files --name cryptobot osinniy/cryptobot:dev
+else
 	docker run -d -p 2121:2121 -v cbot-files:/app/files --name cryptobot osinniy/cryptobot:dev
+endif
 
 start:
 	docker start cryptobot

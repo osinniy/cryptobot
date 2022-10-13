@@ -30,6 +30,17 @@ func Run(flags cmd.Flags) {
 		os.Exit(1)
 	}
 
+	// override config values with flags
+	if flags.DbPath != "" {
+		cfg.Database.Path = flags.DbPath
+	}
+	if flags.CertPath != "" {
+		cfg.Webhook.PubKey = flags.CertPath
+	}
+	if flags.KeyPath != "" {
+		cfg.Webhook.PrivKey = flags.KeyPath
+	}
+
 	// setup logs
 	if flags.Debug && zerolog.GlobalLevel() > zerolog.DebugLevel {
 		zerolog.SetGlobalLevel(zerolog.DebugLevel)
