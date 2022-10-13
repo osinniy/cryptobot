@@ -78,8 +78,8 @@ go install github.com/pressly/goose/v3/cmd/goose@latest
 It might be necessary to add GOBIN to your PATH:
 
 ```bash
-PATH=$PATH:$(go env GOPATH)/bin
-echo $PATH >> ~/.profile
+echo 'export PATH="$PATH:$(go env GOPATH)/bin"' >> ~/.bash_profile
+source ~/.bash_profile
 ```
 
 And then execute migrations. You must be in root project folder:
@@ -109,6 +109,6 @@ Note that you need to have goose installed and GOBIN added to path to be able to
 ```bash
 go install github.com/pressly/goose/v3/cmd/goose@latest
 
-PATH=$PATH:$(go env GOPATH)/bin
-echo $PATH >> ~/.profile
+echo 'export PATH="$PATH:$(go env GOPATH)/bin"' >> ~/.bash_profile
+source ~/.bash_profile
 ```
