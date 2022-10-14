@@ -10,6 +10,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Create config stub
+      run: |
+        mkdir configs/release
+        echo '' >> configs/release/bot.yml
+
     - name: Build image
-      run: make
+      run: make ip=0.0.0.0
