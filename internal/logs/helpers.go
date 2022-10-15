@@ -44,7 +44,7 @@ func ResponseBody(data []byte) {
 	log.Trace().Str("data", string(data)).Caller(1).Msg("response body")
 }
 
-// Logs query to database, elapsed time, error if occured.
+// Logs query to database, elapsed time, error if occurred.
 // queryName must be in format "repo.method".
 func DbQuery(logger *zerolog.Logger, queryName string, err error, startTimestamp time.Time, args ...map[string]any) {
 	endTime := time.Since(startTimestamp)
@@ -58,7 +58,7 @@ func DbQuery(logger *zerolog.Logger, queryName string, err error, startTimestamp
 	logE.Str("query", queryName).Int64("elapsed_µs", endTime.Microseconds()).Msg("db request")
 }
 
-// Logs memory store query, error if occured.
+// Logs memory store query, error if occurred.
 // queryName must be in format "repo.method".
 func MemQuery(logger *zerolog.Logger, queryName string, err error, args ...map[string]any) {
 	logE := logger.Debug()

@@ -17,7 +17,7 @@ var console *zerolog.ConsoleWriter
 
 // Setups console global logger
 // To change level use [SetLevel]
-// To write to file additinally use [SetLogFile]
+// To write to file additionally use [SetLogFile]
 func Setup() {
 	zerolog.ErrorStackMarshaler = pkgerrors.MarshalStack
 	zerolog.TimeFieldFormat = LOG_FILE_TIME_FORMAT

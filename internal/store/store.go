@@ -5,7 +5,7 @@ package store
 // Store is safe for concurrent use.
 type Store interface {
 	// Opens storage so you can obtain repositories from it.
-	// This migth not be required for some stores.
+	// This might not be required for some stores.
 	Open() error
 
 	// Closes storage and nullifies repositories so they will be recreated

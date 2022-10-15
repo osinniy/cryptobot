@@ -62,7 +62,7 @@ func LatestMarketStats() (result *CMCMetricsResponse, err error) {
 		log.Error().
 			Err(err).
 			Int("code", result.Status.ErrorCode).
-			Msg("failed to obtain market stats: CMC returned non-successfull response")
+			Msg("failed to obtain market stats: CMC returned non-successful response")
 		return
 	}
 

@@ -40,7 +40,7 @@ func NewServer(store store.Store, port ...int) *Server {
 	}
 
 	server.configureRoutes()
-	server.configureMIddlewares()
+	server.configureMiddlewares()
 
 	return server
 }
@@ -51,7 +51,7 @@ func (s *Server) configureRoutes() {
 	s.router.HandleFunc("/users/lang", s.usersLang)
 }
 
-func (s *Server) configureMIddlewares() {
+func (s *Server) configureMiddlewares() {
 	s.router.Use(s.mLogger)
 }
 

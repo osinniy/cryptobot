@@ -17,7 +17,7 @@ const (
 	USER_AGENT        = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36"
 )
 
-// Returns coninglass market stats.
+// Returns coinglass market stats.
 // Them includes futures stats, liquidations info and open interest.
 //
 // Uses coinglass.com undocumented api so use it carefully
@@ -54,7 +54,7 @@ func CoinglassStats() (result *CoinglassResponse, err error) {
 		log.Error().
 			Err(err).
 			Str("code", result.Code).
-			Msg("failed to obtain market liquidations: coinglass returned non-successfull response")
+			Msg("failed to obtain market liquidations: coinglass returned non-successful response")
 		return
 	}
 

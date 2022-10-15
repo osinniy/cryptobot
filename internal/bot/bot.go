@@ -117,7 +117,7 @@ func (b *Bot) Run() {
 	b.tbot.Start()
 }
 
-// Gracefull shutdown
+// Graceful shutdown
 func (b *Bot) Stop() {
 	if !b.running {
 		return
