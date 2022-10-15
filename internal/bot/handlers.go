@@ -17,21 +17,23 @@ func (b *Bot) initHandlers() {
 func (b *Bot) onStart(c tg.Context) error {
 	user := c.Sender()
 
-	b.logger.Debug().Func(func(e *zerolog.Event) {
+	b.logger.Info().Func(func(e *zerolog.Event) {
 		// automatically logs exists state
-		b.store.Users().IsExists(user.ID)
+		exists, err := b.store.Users().IsExists(user.ID)
+		if err == nil && !exists {
+			logNewUser(&b.logger, user)
+		}
 	})
 
-	err := b.store.Users().Add(&models.User{
+	// Automatically logs unexpected errors inside.
+	// If user already exists, returns special error
+	// and does't logs it. In this case we can simply
+	// ignore this error.
+	b.store.Users().Add(&models.User{
 		Id:        user.ID,
 		FirstSeen: time.Now().Unix(),
 		Lang:      user.LanguageCode,
 	})
-	if err != nil {
-		return nil
-	}
-
-	logNewUser(&b.logger, user)
 
 	return c.Send("Hello, "+user.FirstName+"!. Welcome to CryptoBot", btnsStart)
 }
