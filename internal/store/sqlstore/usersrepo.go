@@ -35,6 +35,7 @@ func (repo *UsersRepository) Add(user *models.User) (err error) {
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
+		repo.store.logger.Error().Err(err).Msg("rows affected query failed")
 		return err
 	}
 
@@ -89,6 +90,7 @@ func (repo *UsersRepository) SetLang(userId int64, lang string) (err error) {
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
+		repo.store.logger.Error().Err(err).Msg("rows affected query failed")
 		return err
 	}
 
