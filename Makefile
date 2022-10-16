@@ -6,13 +6,25 @@ sec:
 	gosec -no-fail cmd/... internal/...
 
 build:
+ifdef version
+	docker build --build-arg ip=$(ip) -t osinniy/cryptobot:$(version) .
+else
 	docker build --build-arg ip=$(ip) -t osinniy/cryptobot:dev .
+endif
 
 run:
 ifdef port
+ifdef version
+	docker run -d -p 2121:2121 -p $(port):$(port) -v cbot-files:/app/files --name cryptobot osinniy/cryptobot:$(version)
+else
 	docker run -d -p 2121:2121 -p $(port):$(port) -v cbot-files:/app/files --name cryptobot osinniy/cryptobot:dev
+endif
+else
+ifdef version
+	docker run -d -p 2121:2121 -v cbot-files:/app/files --name cryptobot osinniy/cryptobot:$(version)
 else
 	docker run -d -p 2121:2121 -v cbot-files:/app/files --name cryptobot osinniy/cryptobot:dev
+endif
 endif
 
 start:
@@ -25,13 +37,21 @@ rm:
 	docker rm cryptobot
 
 rmi:
+ifdef version
+	docker rmi osinniy/cryptobot:$(version)
+else
 	docker rmi osinniy/cryptobot:dev
+endif
 
 logs:
 	docker logs -f cryptobot
 
 push: test
+ifdef version
+	docker push osinniy/cryptobot:$(version)
+else
 	docker push osinniy/cryptobot:dev
+endif
 
 restart:
 	make stop
