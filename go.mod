@@ -3,7 +3,7 @@ module osinniy/cryptobot
 go 1.19
 
 require (
-	github.com/gookit/config/v2 v2.1.6
+	github.com/gookit/config/v2 v2.1.7
 	github.com/gorilla/mux v1.8.0
 	github.com/jmoiron/sqlx v1.3.5
 	github.com/mattn/go-sqlite3 v1.14.15
@@ -15,7 +15,7 @@ require (
 
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/gookit/goutil v0.5.12 // indirect
+	github.com/gookit/goutil v0.5.15 // indirect
 	github.com/imdario/mergo v0.3.13 // indirect
 	github.com/lib/pq v1.10.6 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
