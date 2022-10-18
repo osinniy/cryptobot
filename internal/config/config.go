@@ -28,8 +28,8 @@ type Config struct {
 	}
 
 	Service struct {
-		RefreshInterval uint
-		KeepAlive       uint
+		RefreshInterval int
+		KeepAlive       int
 	}
 
 	Logs struct {
@@ -94,8 +94,29 @@ func checkDefaults(conf *Config) {
 }
 
 func validate(conf *Config) {
+	if conf.Secrets.BotToken == "" {
+		log.Fatal().Msg("bot token is not set")
+	}
+
+	if conf.Secrets.CMCApiKey == "" {
+		log.Fatal().Msg("coinmarketcap.com api key is not set")
+	}
+
+	if conf.Service.RefreshInterval <= 0 {
+		log.Fatal().Msg("service refresh interval must be positive")
+	}
+
+	if conf.Service.KeepAlive <= 0 {
+		log.Fatal().Msg("service keep alive time must be positive")
+	}
+
+	if conf.Service.RefreshInterval < 60 {
+		log.Warn().Int("refresh_interval", conf.Service.RefreshInterval).
+			Msg("refresh interval is too low. Your credits may be quickly exhausted")
+	}
+
 	switch conf.Webhook.Port {
-	case 0, 443, 80, 88, 8443:
+	case 443, 80, 88, 8443:
 	default:
 		log.Error().Int("port", conf.Webhook.Port).Msg("invalid webhook port in config")
 	}
