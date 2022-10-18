@@ -33,6 +33,9 @@ start:
 stop:
 	docker stop cryptobot
 
+restart:
+	docker restart cryptobot
+
 rm:
 	docker rm cryptobot
 
@@ -52,10 +55,6 @@ ifdef version
 else
 	docker push osinniy/cryptobot:dev
 endif
-
-restart:
-	make stop
-	make start
 
 rebuild:
 	make rm
