@@ -9,8 +9,8 @@ import (
 )
 
 const (
-	CONSOLE_TIME_FORMAT  = "2006-01-02 15:04:05"
-	LOG_FILE_TIME_FORMAT = "2006-01-02T15:04:05"
+	CONSOLE_TIME_FORMAT  = "2006-01-02 15:04:05.000"
+	LOG_FILE_TIME_FORMAT = "2006-01-02T15:04:05.000"
 )
 
 var console *zerolog.ConsoleWriter
