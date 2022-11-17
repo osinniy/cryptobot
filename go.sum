@@ -55,7 +55,7 @@ cloud.google.com/go/storage v1.10.0/go.mod h1:FLPqc6j+Ki4BU591ie1oL6qBQGu2Bl/tZ9
 cloud.google.com/go/storage v1.14.0/go.mod h1:GrKmX003DSIwi9o29oFT7YDnHYwZoctc3fOKtUw0Xmo=
 dmitri.shuralyov.com/gpu/mtl v0.0.0-20190408044501-666a987793e9/go.mod h1:H6x//7gZCb22OMCxBHrMx7a5I7Hp++hsVxbQ4BYO7hU=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
-github.com/BurntSushi/toml v1.2.0/go.mod h1:CxXYINrC8qIiEnFrOxCa7Jy5BFHlXnUU2pbicEuybxQ=
+github.com/BurntSushi/toml v1.2.1/go.mod h1:CxXYINrC8qIiEnFrOxCa7Jy5BFHlXnUU2pbicEuybxQ=
 github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802/go.mod h1:IVnqGOEym/WlBOVXweHU+Q+/VP0lqqI8lqeDx9IjBqo=
 github.com/DataDog/datadog-go v3.2.0+incompatible/go.mod h1:LButxg5PwREeZtORoXG3tL4fMGNddJ+vMq1mwgfaqoQ=
 github.com/OneOfOne/xxhash v1.2.2/go.mod h1:HSdplMjZKSmBqAxg5vPj2TmRDmfkzw+cTzAElWljhcU=
@@ -223,8 +223,8 @@ github.com/googleapis/gax-go/v2 v2.4.0/go.mod h1:XOTVJ59hdnfJLIP/dh8n5CGryZR2LxK
 github.com/googleapis/google-cloud-go-testing v0.0.0-20200911160855-bcd43fbb19e8/go.mod h1:dvDLG8qkwmyD9a/MJJN3XJcT3xFxOKAvTZGvuZmac9g=
 github.com/gookit/color v1.5.2 h1:uLnfXcaFjlrDnQDT+NCBcfhrXqYTx/rcCa6xn01Y8yI=
 github.com/gookit/color v1.5.2/go.mod h1:w8h4bGiHeeBpvQVePTutdbERIUf3oJE5lZ8HM0UgXyg=
-github.com/gookit/config/v2 v2.1.7 h1:pxIXnHEoeUv6DtbUl4qj8gE3YxgWPjuuB9wiKur9JE0=
-github.com/gookit/config/v2 v2.1.7/go.mod h1:Rlm83qfFCyrJ+8O3iTx2xUvflOTBrCuLcaT65fytENA=
+github.com/gookit/config/v2 v2.1.8 h1:fH8NKzOLlQ2Ud65Czy5Tq+t1I8U7M9BmIPgVFQ4T9UQ=
+github.com/gookit/config/v2 v2.1.8/go.mod h1:AP8Obh1AKx1pFkBNE2EghDb1ei2/fG33ULfkzuw4s0c=
 github.com/gookit/goutil v0.5.14/go.mod h1:ozPE16eJS9f89aVbVk05ocEJsia3KPrYUqPTs8GvUTw=
 github.com/gookit/goutil v0.5.15 h1:FaRyj0uVqi7j92QHsG+2Sc1VZ7/7ma77UD3/wBpwyTc=
 github.com/gookit/goutil v0.5.15/go.mod h1:ozPE16eJS9f89aVbVk05ocEJsia3KPrYUqPTs8GvUTw=
