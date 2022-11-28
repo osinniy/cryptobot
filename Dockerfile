@@ -36,7 +36,7 @@ RUN go build -v -ldflags="-s -w" -trimpath -o cryptobot cmd/cryptobot/main.go
 
 # Final image
 
-FROM alpine:3.16
+FROM alpine:3.17
 
 WORKDIR /app
 
