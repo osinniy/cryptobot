@@ -65,7 +65,7 @@ jobs:
 
     - name: Verify Change
       if: matrix.os == 'ubuntu-latest'
-      uses: tj-actions/verify-changed-files@v12.0
+      uses: tj-actions/verify-changed-files@v13.1
       id: verify-changed-files
       with:
         files: README.md
