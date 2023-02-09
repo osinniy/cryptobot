@@ -9,7 +9,7 @@ require (
 	github.com/mattn/go-sqlite3 v1.14.16
 	github.com/rs/zerolog v1.29.0
 	github.com/stretchr/testify v1.8.1
-	golang.org/x/text v0.6.0
+	golang.org/x/text v0.7.0
 	gopkg.in/telebot.v3 v3.1.0
 )
 
