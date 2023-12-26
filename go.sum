@@ -229,8 +229,8 @@ github.com/gookit/config/v2 v2.2.3/go.mod h1:FhmMu+2wg0UhyOjVGo+DZ1+ov34q4G4aWXz
 github.com/gookit/goutil v0.6.10 h1:iq7CXOf+fYLvrVAh3+ZoLgufGfK65TwbzE8NpnPGtyk=
 github.com/gookit/goutil v0.6.10/go.mod h1:qqrPoX+Pm6YmxqqccgkNLPirTFX7UYMES1SK+fokqQU=
 github.com/gookit/ini/v2 v2.2.2 h1:3B8abZJrVH1vi/7TU4STuTBxdhiAq1ORSt6NJZCahaI=
-github.com/gorilla/mux v1.8.0 h1:i40aqfkR1h2SlN9hojwV5ZA91wcXFOvkdNIeFDP5koI=
-github.com/gorilla/mux v1.8.0/go.mod h1:DVbg23sWSpFRCP0SfiEN6jmj59UnW/n46BH5rLB71So=
+github.com/gorilla/mux v1.8.1 h1:TuBL49tXwgrFYWhqrNgrUNEY92u81SPhu7sTdzQEiWY=
+github.com/gorilla/mux v1.8.1/go.mod h1:AKf9I4AEqPTmMytcMc0KkNouC66V3BtZ4qD5fmWSiMQ=
 github.com/grpc-ecosystem/go-grpc-prometheus v1.2.0/go.mod h1:8NvIoxWQoOIhqOTXgfV/d3M/q6VIi02HzZEHgUlZvzk=
 github.com/grpc-ecosystem/grpc-gateway v1.16.0/go.mod h1:BDjrQk3hbvj6Nolgz8mAMFbcEtjT1g+wF4CSlocrBnw=
 github.com/hashicorp/consul/api v1.12.0/go.mod h1:6pVBMo0ebnYdt2S3H87XhekM/HHrUoTD2XXb/VrZVy0=
