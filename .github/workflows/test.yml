@@ -37,7 +37,7 @@ jobs:
         echo "::set-output name=GOBIN::$gopath/bin"
 
     - name: Cache
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       id: cache
       with:
         path: |
